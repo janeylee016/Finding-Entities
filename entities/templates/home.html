@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+{% block title %} Home Page {% endblock %}
+
+{% block content%}
+	<link href="imgs/styles1.css?v=1.2" rel="stylesheet">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <script
+          src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"
+        ></script>
+
+    <!-- <link rel="stylesheet" href= "{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<link href="{{url_for('static', filename='css/styles.css?v=1.2')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='css/queries.css?v=1.2')}}" rel="stylesheet">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/flexslider.css?v=1.2')}}" type="text/css">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}" type="text/css">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"> -->
+
+    <div style="background:transparent !important" class="jumbotron">
+        <div class="text-center"><img src= "imgs/Extractoo2.png"></div>
+    </div>
+
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+            <p>{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <br>
+
+    <div class="container container-text" >
+        <div class="card-header">
+            <!-- <h3>Transcripts</h3>
+            <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#text" role="tab" aria-controls="text">Text</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#file" role="tab" aria-controls="file">File</a></li>
+            </ul>
+             <br> -->
+
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="text" role="tabpanel">
+                        <div class="container">
+                        <h3> Text</h3>
+                        <p>Enter your transcript text here</p>
+                            <form method ="POST">
+                              <div class="form-group">
+                                <label for="input">Input:</label>
+                                <textarea class="form-control" rows="5" id="input" name="input" type="text"></textarea>
+                              </div>
+                              <button type="reset" class="btn btn-primary">Clear</button>
+                              <button type="Submit" class="btn btn-primary" id="input-submit" name="input-submit" onclick="myFunction()">Submit</button>
+                            </form>
+                          </div>
+                    </div>
+                    <!--<div class="tab-pane" id="file" role="tabpanel">
+                        <h3>File</h3>
+                        <p>Upload files or drag and dropped</p>
+                            <p>Click on the "Choose File" button to upload a file:</p>
+                            <form method = "POST" enctype="multipart/form-data">
+                            <input type="file" id="filename" name="filename">
+                            <input type="submit" class="btn btn-primary" id="file-submit" name="file-submit">
+                            </form>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="responsive-logo"></div>
+                <div class="pullcontainer">
+                    <a href='#' id="pull"><i class="fa fa-bars fa-2x"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <nav>
+                        <div class="logo-holder"></div>
+                        <ul class="clearfix">
+                            <li><a href="#result">Result Transcript</a></li>
+                            <li class="dot">.</li>
+                            <li><a href="#entities">Entities</a></li>
+                            <li class="dot">.</li>
+                            <li><a href="#why_how_entities">Questions</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-bg">
+    <div class="container" id="result">
+        <div class="card-header">
+            <h3>Transcripts</h3> 
+            <div id ='output'>
+                <p style="color:black;" class="output">{{ test|safe }}</p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="container">
+        <table class=table id="entities">
+            <thead>
+                <tr>
+                    <th><strong>ENTITIES</strong></th>
+                    <th><strong>RESULTS</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <div class="who">
+                <tr>
+                    <td>WHO</td>
+                    <td id="who"></td>
+                </div>
+                <tr>
+                    <td>WHEN</td>
+                    <td id="when"></td>
+                </tr>
+                <tr>
+                    <td>WHERE</td>
+                    <td id="where"></td>
+               </tr>
+                <tr>
+                    <td>WHAT</td>
+                    <td id="what"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class=table id ="why_how_entities">
+            <thead>
+                <tr>
+                    <th><strong>ENTITIES (QUESTIONS)</strong></th>
+                    <th><strong>RESULTS</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>HOW was the crime committed?</td>
+                    <td>{{ qn1 }}</td>
+                </tr>
+                <tr>
+                    <td>HOW long was the sentence?</td>
+                    <td>{{ qn2 }}</td>
+                </tr>
+                <tr>
+                    <td>HOW old was the victim?</td>
+                    <td>{{ qn3 }}</td>
+                </tr>
+                <tr>
+                    <td>HOW much was the fine?</td>
+                    <td>{{ qn4 }}</td>
+                </tr>
+                <tr>
+                    <td>WHY was the person arrested?</td>
+                    <td>{{ qn5 }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "Paragraph changed.";
+        }
+
+        let output_who = document.getElementById("who");
+        function whoEntity(who) {
+            let html_who = "";
+            for (i=0; i <who.length; i++) {
+                html_who += '<span style="background-color:rgb(174, 212, 255)">' + who[i] + '</span>' + " " + "|" + " "
+            }
+       
+        console.log("DONE WHO ==>")
+        var html = $.parseHTML(html_who)
+        $("#who").html(html);
+            }
+        whoEntity({{ who|safe }})
+        
+
+        let output_when = document.getElementById("when");
+        function whenEntity(when) {
+            let html_when = "";
+            for (i=0; i <when.length; i++) {
+                html_when += '<span style="background-color:rgba(123,239,178,0.5)">' + when[i] + '</span>' + " " + "|" + " "
+            }
+        console.log("DONE WHEN ==>")
+        var html = $.parseHTML(html_when )
+        $("#when").html(html);
+            }
+        whenEntity({{ when|safe }})
+
+        let output_where = document.getElementById("where");
+        function whereEntity(where) {
+            let html_where = "";
+            for (i=0; i <where.length; i++) {
+                html_where += '<span style="background-color:rgb(255, 204, 204)">' + where[i] + '</span>' + " " + "|" + " "
+            }
+        console.log("DONE WHERE ==>")
+        var html = $.parseHTML(html_where )
+        $("#where").html(html);
+            }
+        whereEntity({{ where_sum|safe }})
+
+        let output_what = document.getElementById("what");
+        function whatEntity(what) {
+            let html_what = "";
+            for (i=0; i <what.length; i++) {
+                html_what += '<span style="background-color:rgb(255, 255, 179)">' + what[i] + '</span>' + " " + "|" + " "
+            }
+        console.log("DONE WHAT ==>")
+        var html = $.parseHTML(html_what )
+        $("#what").html(html);
+            }
+        whatEntity({{ what|safe }})
+
+    </script>
+
+{% endblock %}

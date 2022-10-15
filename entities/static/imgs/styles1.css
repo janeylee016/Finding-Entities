@@ -1,0 +1,123 @@
+
+/* ==========================================================================
+User Styles
+========================================================================== */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+/* ==========================================================================
+User Styles
+========================================================================== */
+.clearfix:before, .clearfix:after { content: " "; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }
+.pullcontainer a#pull { display: none; }
+a { color: #282f35; -webkit-transition: all .25s ease; -moz-transition: all .25s ease; -ms-transition: all .25s ease; -o-transition: all .25s ease; transition: all .25s ease; }
+a:hover { color: #64c29e; text-decoration: none; }
+
+#output {
+    /* width: 100px; */
+    background: white;
+    /* border-radius: 15px;
+    margin: 0 auto;
+    text-align: center; */
+} 
+
+.responsive-logo { display: hidden; }
+/* header { background-color: #f4f5fc; } */
+header { background-color: #fffff; }
+header ul { padding-top: 35px; }
+header ul li { list-style: none; float: left; text-transform: uppercase; letter-spacing: 2px; }
+header ul li a { display: block; margin: 0 30px; color: #4d4959; font-size: 20px; }
+
+
+input[type="search"] { -webkit-appearance: textfield; /* 1 */
+	-moz-box-sizing: content-box; -webkit-box-sizing: content-box; /* 2 */
+box-sizing: content-box; }
+
+html { font-size: 100%; /* 1 */
+	-webkit-text-size-adjust: 100%; /* 2 */
+-ms-text-size-adjust: 100%; /* 2 */ }
+/* * Addresses `font-family` inconsistency between `textarea` and other form
+* elements. */
+html, button, input, select, textarea { font-family: sans-serif; }
+/* * Addresses margins handled incorrectly in IE 6/7. */
+/* body { margin: 0; font-family: 'Lato', sans-serif; overflow-x: hidden; } */
+body { margin: 0; overflow-x: hidden; }
+html, body { width: auto !important; overflow-x: hidden !important; }
+
+#input {
+    width: 90%;
+    font-size: 16px;
+}
+
+p.output{
+    word-spacing: 12px;
+ }
+
+body {font-size:16px; }
+
+img {
+    width:540px; 
+    height: auto;
+    text-align:center;
+}
+
+
+/* .jumbotron {
+    background-image: url("../img/jumbotron_bg.jpg");
+    background-size: cover;
+  } */
+
+
+/* .flex-container {
+    display: flex;
+} */
+
+/*.flex-child {
+    flex: 1;
+    border: 2px solid white;
+}  
+
+.flex-child:first-child {
+    margin-left: 20px;
+    width: 300px;
+    height: 100px;
+    
+
+}  */
+
+/* .card-body > textarea {
+    display:block;
+    padding:20px;
+    background:red;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+} */
+
+
+/* .content-box {
+    box-sizing: content-box;
+    /* Total width: 160px + (2 * 20px) + (2 * 8px) = 216px
+       Total height: 80px + (2 * 20px) + (2 * 8px) = 136px
+       Content box width: 160px
+       Content box height: 80px */
+
+
+/* #container {
+    width: 1500px;
+    background-color: #ffcc33;
+    margin: auto;
+}
+#first {
+    width: 600px;
+    float: left;
+    height: 300px;
+    /*background-color: blue*/;
+/*}
+#second {
+    width: 700px;
+    float: left;
+    height: 300px;
+    /*background-color: green;*/
+/*} */
