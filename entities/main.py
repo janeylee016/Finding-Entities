@@ -9,7 +9,7 @@ from IPython.core.display import display, HTML
 
 # from entities.location import rule3
 # from entities.address import pred
-from entities.address import address
+#from entities.address import address
 from entities.use_spacy import use_spacy
 from entities.who import wiki_who, professions
 from entities.where import where_rule, sparql
