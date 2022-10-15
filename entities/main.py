@@ -18,7 +18,7 @@ from entities.why_how import qa
 
 
 #main = Blueprint("main", __name__, static_folder="static/css", template_folder="templates")
-main = Blueprint("main", __name__, static_folder="static/imgs/", template_folder="templates")
+main = Blueprint("main", __name__, static_folder="static/imgs", template_folder="templates")
 
 
 @main.route('/home')
