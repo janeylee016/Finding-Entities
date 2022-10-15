@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous"
+        />
+        <title></title>
+    </head>
+    <body>
+
+      <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+              <a class="nav-item nav-link" id="home" href="/">Home Page</a>
+              <a class="nav-item nav-link" id="results" href="/results">Results Page</a>
+          </ul>
+        </div>
+      </nav>
+
+          <div class="container-fluid">
+            <div class="container">
+                <div class="card-header">
+                <h3>Transcripts</h3>
+                <p>{{ filename }}</p>
+            <form>
+                <textarea name='result' id='result' class="form-control" rows="10">{{ result(input, text) }} </textarea>
+            </form>
+            </div>
+            </div>
+
+            <script type="text/javascript">
+                function result(input, text) {
+                    var x = document.getElementById("input")
+                    var y = document.getElementById("filename")
+                    if input != [] {
+                        res = input;
+                    else {
+                        res = text;
+                    }
+                    }
+
+                    return res 
+
+                }
+
+                function receiveData(response) {
+                    var divContent = "<p style='font-size:20px'>" + response.text + "</p>";
+                    $('#button').attr('class', 'input-submit')
+                
+                    // location
+                    let html_loc = "";
+                    var loc_color = 'violet';
+                    for (let i = 0; i < response.length; i++) {
+                        //html_loc += "<a class='ui " + loc_color + " label' style='font-size:15px'>" + response[i] + "</a>";
+                        html_loc += "<span style='color:blue;font-weight:bold'>" + response[i] + "</span>";
+                        var re = new RegExp(response[i], 'gi');
+                        //var divContent = divContent.replace(re, "<a class='ui " + loc_color + " label' style='font-size:20px' data-tooltip='Location'>" + response[i] + "</a>");
+                        var divContent = divContent.replace(re, "<span style='color:blue;font-weight:bold'>" + response[i] + "</span>"); 
+                    }
+                    $("#result").html(html_loc);
+                }
+                
+                $("#input-submit").click(function (e) {
+                console.log("Hello");
+                let text = $("#input").val();
+                $('#button').attr('class', 'input-submit');
+
+                $.post("http://127.0.0.1:5000/results", {data1: text}, receiveData);
+                    });
+                </script>
+                </div>
+
+        <script
+          src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"
+        ></script>
+
+    
+    </body>
+</html>
+

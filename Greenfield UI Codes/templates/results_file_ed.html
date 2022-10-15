@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %} Input {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card-header">
+        <h3>Transcripts</h3>
+
+<div id="output">
+<p>{{ filename }}</p>
+<form>
+    <!-- {% if not input %}
+        <textarea name='result' id='result' class="form-control" rows="10">{{ text }} </textarea>
+    {% elif not text %}
+        <textarea name='result' id='result' class="form-control" rows="10">{{ res.text }} </textarea>
+    {% else %}
+    error
+    {% endif %} -->
+    <textarea name='result' id='result' class="form-control" rows="10">{{ resp.text }} </textarea>
+</form>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+    function receiveData(resp) {
+        var divContent = "<p style='font-size:20px'>" + resp.text + "</p>";
+        $('#button').attr('class', 'input-submit')
+    
+        // location
+        let html_loc = "";
+        var loc_color = 'violet';
+        for (let i = 0; i < response.loc.length; i++) {
+            //html_loc += "<a class='ui " + loc_color + " label' style='font-size:15px'>" + response[i] + "</a>";
+            html_loc += "<span style='color:blue;font-weight:bold'>" + resp.loc[i] + "</span>";
+            var re = new RegExp(resp.loc[i], 'gi');
+            //var divContent = divContent.replace(re, "<a class='ui " + loc_color + " label' style='font-size:20px' data-tooltip='Location'>" + response[i] + "</a>");
+            var divContent = divContent.replace(re, "<span style='color:blue;font-weight:bold'>" + resp.loc[i] + "</span>"); 
+        }
+        //$("#result").html(html_loc);
+
+        $("#output").html(divContent);
+    }
+
+
+    
+    $("#input-submit").click(function (e) {
+                console.log("Hello");
+                let text = $("#input").val();
+                $('#button').attr('class', 'input-submit');
+    
+                $.post("http://127.0.0.1:5000/results", {data1: text}, receiveData);
+          });
+
+
+    </script>
+
+{% endblock %}
+
